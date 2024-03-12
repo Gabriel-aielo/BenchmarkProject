@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-br">
+        <title>BENCHMARK</title>
+        <meta charset="utf-8">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./index.css">
+        <link rel="icon" type="image/png" href="./img/icon.png">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        
+        
+        <!--Scripts JavaScript para tratamento dos dados em json-->
+
+        <script src="buscaClienteTest.js"></script>
+
+    </head>
+
+    <body>
+
+        <!--Navbar Brand-->
+        <nav class="container-fluid  navbar navbar-expand-md shadow mb-5 navbar-light bg-light mb-4">
+            <div class="row col-md-12 align-items-center">
+
+                <div class="row col-md-8 align-items-center">
+                    <div class=" navbar-brand"><a><img src="./img/icon.png" width="70px"></a></div>
+                        <h3 class="align-items-center col-md-9  brandText">CONSULTA BENCHMARK</h3>
+                </div>
+
+                <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbar" ><i class="fas fa-bars"></i>a</button>
+
+                <div class="col-md-4 navbar-collapse collapse" id="navbar"> 
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-item btn"><a href="index.html" class="navbar-item buscaID">Busca por ID</a></li>
+                        <li class="navbar-item btn"><a href="#" class="navbar-item buscaID">Busca por cliente </a></li>
+                      
+                    </ul>
+                </div>
+            
+            </div>
+
+        </nav>
+
+
+        <section class="container p-5 shadow rounded border">
+            <div class="row">
+                <div class="col-md-12">
+                    <h5>Atualize para ativar a busca de clientes</h5>
+                </div>
+
+                <div class="input-group mb-3 d-flex justify-content-center">
+                <select id="rodaCliente" class=" col-md-10 form-control"><option>Atualize</option></select>
+                    <div class="input-group-append">
+                      <button class=" btn btn-success input-group-text" id="basic-addon2" onclick="atualizarDados()" >Atualizar</button>
+                    </div>
+                  </div>
+
+
+
+                <div class="container">
+                    <div class="row justify-content-center d-flex" id="dadosCliente">
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </body>
+</html> 

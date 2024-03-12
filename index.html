@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head lang="pt-br">
+        <title>BENCHMARK</title>
+        <meta charset="utf-8">
+
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="./index.css">
+        <link rel="icon" type="image/png" href="./img/icon.png">
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+
+        
+        
+        <!--Scripts JavaScript para tratamento dos dados em json-->
+
+        <script src="buscaIDTestCompleto.js"></script>
+
+    </head>
+
+    <body>
+
+        <!--Navbar Brand-->
+        <nav class="container-fluid  navbar navbar-expand-md shadow mb-3 navbar-light bg-light mb-4">
+            <div class="row col-md-12 align-items-center">
+
+                <div class="row col-md-8 align-items-center">
+                    <div class=" navbar-brand"><a><img src="./img/icon.png" width="70px"></a></div>
+                        <h3 class="align-items-center col-md-9  brandText">CONSULTA BENCHMARK</h3>
+                </div>
+
+                <button class="navbar-toggler ml-auto" data-toggle="collapse" data-target="#navbar" ><i class="fas fa-bars"></i>a</button>
+
+                <div class="col-md-4 navbar-collapse collapse" id="navbar"> 
+                    <ul class="navbar-nav ml-auto">
+                        <li class="navbar-item btn"><a href="#" class="navbar-item buscaID">Busca por ID</a></li>
+                        <li class="navbar-item btn"><a href="indexBuscaPorCliente.html" class="navbar-item buscaID">Busca por cliente </a></li>
+                      
+                    </ul>
+                </div>
+            
+            </div>
+
+        </nav>
+
+        <!--Inputs de consulta-->
+
+        <div class="container mt-3 rounded shadow p-5">
+            <div class="row d-flex ">
+
+                    <h6 class="col-md-12">INSIRA O ID PARA BUSCAR AS INFORMAÇÕES QUE DESEJA:</h6>
+                        
+                        <input type="text" id="IDinsert" class="col-md-3 m-1 rounded border inputEnter shadow" placeholder="ID" onblur="getDadosBenchmark(this.value)">
+                    
+                        <input id="status" type="text" disabled class="col-md-3 m-1 rounded inputDesign shadow-sm" placeholder="STATUS">
+                    
+                        <input id="causeCode" type="text" disabled class="col-md-4 m-1 rounded inputDesign shadow-sm" placeholder="CAUSE CODE">
+
+                        <input type="text" id="hbfOrderNumber" disabled class="col-md-4 m-1 rounded inputDesign shadow-sm" placeholder="HBF ORDER NUMBER">
+                    
+                        <input id="fullCustomerName" type="text" disabled class="col-md-4 m-1 rounded inputDesign shadow-sm" placeholder="CUSTOMER">
+                        
+                        <textarea id="customerMaterial" type="text" disabled class="m-1 col-md-6 rounded inputDesign shadow-sm" placeholder="CUSTOMER MATERIAL"></textarea>
+                    
+                        <input type="number" disabled class="col-md-2 m-1 rounded inputDesign shadow-sm" placeholder="LOTE">
+
+                        <textarea id="descricao" type="text" disabled class="col-md-6 m-1 rounded inputDesignDescricao inputDesign shadow-sm" placeholder="DESCRIÇÃO"></textarea>
+                    
+                        <textarea id="riskDescription" class="col-md-4 m-1 rounded inputDesign"  disabled placeholder="RISK DESCRIPTION"></textarea>
+
+                        <input id="category" type="text" disabled class="col-md-3 m-1 rounded inputDesign shadow-sm" placeholder="CLASSIFICAÇÃO">
+                    
+                        <input id="facilityRelated" type="text" disabled class="col-md-4 m-1 rounded inputDesign shadow-sm" placeholder="FACILITY RELATED">
+
+                        <input id="jobFactor" type="text" disabled class="col-md-4 m-1 rounded inputDesign shadow-sm" placeholder="JOB FACTOR">
+
+            </div>
+        </div>
+
+        <div id="divMaster" class="container mt-5 text-center">
+            <span id="erro" class="btn p-3 initialSpan">Insira o ID desejado</span>
+        </div>
+
+    </body>
+</html>
