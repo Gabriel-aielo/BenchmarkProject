@@ -11,6 +11,12 @@ function atualizarDados() {
 
                 let nomesClientes = new Set(); // Conjunto para armazenar nomes únicos
                 let clientes = {}; // Objeto para armazenar os clientes e suas informações
+
+                //Data diária
+                let dataAtual = new Date();
+                let dataFormatada = `${dataAtual.getDate()}/${dataAtual.getMonth() + 1}/${dataAtual.getFullYear()}`;
+//                console.log(dataFormatada);
+
                 
                 for(let i in objJSONID){
                     let valorRecuperado = objJSONID[i];
@@ -27,6 +33,8 @@ function atualizarDados() {
                     let hbOrder = valorRecuperado['HBF Order Number'];
                     let dataComplete = valorRecuperado['Investigation Complete Date'];
                     let invoice = valorRecuperado['Invoice Number'];
+                    let data = valorRecuperado.Date;
+                    let dataFechamento = valorRecuperado['Closure Date']
 
                     // Armazena o nome no conjunto (Set)
                     nomesClientes.add(nomeCliente);
@@ -49,6 +57,8 @@ function atualizarDados() {
                             finishDate: [],
                             invoiceNumber: [],
                             materialCustomer: [],
+                            dataAberta: [],
+                            dataFechamentoArray: [],
                         };
                     }
                 
@@ -63,6 +73,8 @@ function atualizarDados() {
                     clientes[nomeCliente].finishDate.push(dataComplete);
                     clientes[nomeCliente].invoiceNumber.push(invoice);
                     clientes[nomeCliente].materialCustomer.push(customerMaterial);
+                    clientes[nomeCliente].dataAberta.push(data);
+                    clientes[nomeCliente].dataFechamentoArray.push(dataFechamento);
 
                 }
 
@@ -104,6 +116,48 @@ function atualizarDados() {
                             let armazenaFinishDate = clientes[valorSelecionado].finishDate[i];
                             let armazenaInvoice = clientes[valorSelecionado].invoiceNumber[i];
                             let armazenaCustomerMaterial = clientes[valorSelecionado].materialCustomer[i];
+                            let armazenaDataAberturaString = clientes[valorSelecionado].dataAberta[i];
+                            let armazenaDataFechamentoString = clientes[valorSelecionado].dataFechamentoArray[i];
+                            
+                            /*-----------------------------Tratando a data para dias corridos-----------------------------------*/
+                            // Função para converter uma string de data no formato "DD/MM/YYYY" para um objeto de data
+                            function converterStringParaData(dataString) {
+                                // Dividindo a string em partes (dia, mês, ano)
+                                let partesData = dataString.split('/');
+                                // Criando um objeto de data com as partes extraídas
+                                // Lembre-se de que o mês em objetos de data JavaScript é baseado em zero, então subtraímos 1 do mês
+                                return new Date(partesData[2], partesData[1] - 1, partesData[0]);
+                            }
+                            
+                            // Convertendo as strings em objetos de data
+                            let convertendoDataAbertura = converterStringParaData(armazenaDataAberturaString);
+                            let convertendoDataFechamento = converterStringParaData(armazenaDataFechamentoString);
+                            
+                            // Verificando se as datas foram criadas corretamente
+                            if (isNaN(convertendoDataAbertura.getTime())) {
+                                console.error("Data de abertura inválida:", armazenaDataAberturaString);
+                            }
+                            if (isNaN(convertendoDataFechamento.getTime())) {
+                                console.error("Data de fechamento inválida:", armazenaDataFechamentoString);
+                                console.log(armazenaDataFechamentoString)
+
+                            }
+                            
+                            // Se as datas são válidas, calcule a diferença em dias
+                            let diferencaEmDias
+                            if (!isNaN(convertendoDataAbertura.getTime()) && !isNaN(convertendoDataFechamento.getTime())) {
+                                // Calculando a diferença em milissegundos
+                                let diferencaEmMilissegundos = convertendoDataFechamento - convertendoDataAbertura;
+                            
+                                // Convertendo a diferença para dias
+                                diferencaEmDias = diferencaEmMilissegundos / (1000 * 3600 * 24);
+                                
+                            }
+
+                           // console.log("Dias decorridos:", diferencaEmDias);
+                             //   console.log(armazenaDataAberturaString)
+                              //  console.log(armazenaDataFechamentoString)
+                            
 
                             /*------------------------Bloco principal------------------------*/
                             let divBloco = document.createElement('div');
@@ -197,12 +251,23 @@ function atualizarDados() {
                             /*------------------------Status Cliente------------------------*/
                             let inputStatusCliente = document.createElement('input');
                             inputStatusCliente.type = 'text';
+
                             if(statusCliente == ''){
                             inputStatusCliente.value = `Status: N/A`;
                             } else {
-                            inputStatusCliente.value = `Status: ${statusCliente}`;
+                                inputStatusCliente.value = `Status: ${statusCliente} | Dias corridos: ${diferencaEmDias}`;
+                                inputStatusCliente.className = 'col-md-3 m-1 rounded border';
+
+                                if(statusCliente == "Closed"){
+                                    inputStatusCliente.classList.add('bg-success', 'text-white'); // Adiciona classe de fundo verde
+                                } else if(statusCliente == "Open"){
+                                    inputStatusCliente.classList.add('bg-danger', 'text-white'); // Adiciona classe de fundo verde
+                                } else if(statusCliente == ''){
+                                    inputStatusCliente.classList.add('bg-danger', 'text-white'); // Adiciona classe de fundo verde
+                                    inputStatusCliente.value = `Status: Dado Vazio`;
+
+                                }
                             }                         
-                            inputStatusCliente.className = 'col-md-3 m-1 rounded border';
                             inputStatusCliente.disabled = true;
                             divBloco.appendChild(inputStatusCliente);
 
